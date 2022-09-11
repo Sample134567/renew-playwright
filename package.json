@@ -1,0 +1,21 @@
+{
+  "name": "renew-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sample134567/renew-playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sample134567/renew-playwright/issues"
+  },
+  "homepage": "https://github.com/Sample134567/renew-playwright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.25.2"
+  }
+}
