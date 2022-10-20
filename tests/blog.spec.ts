@@ -11,7 +11,7 @@ test.describe('Contact', () => {
 
         // loop through the list and assert the char length > 10
         for (const element of await recentPostList.elementHandles()) {
-            expect(((await element.textContent())?.trim())?.length).toBeGreaterThan(15)
+            expect(((await element.textContent())?.trim())?.length).toBeGreaterThan(10)
         }
 
         // assert the total length == 5
