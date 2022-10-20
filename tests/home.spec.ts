@@ -79,10 +79,15 @@ test.describe('Home', () => {
         await page.goto('https://practice.automationbro.com');
 
         // find the nav links
-        const navLinks = page.locator('#primary-menu li[id*=menu]').nth(3)
+        const navLinks = page.locator('#primary-menu li[id*=menu]')
+
+        // print out all the links
+        for (const element of await navLinks.elementHandles()) {
+            console.log(await element.textContent())
+        }
 
         // Verify nav links text
-        //expect(await navLinks.allTextContents()).toEqual("expectedLinks");
-        expect(await navLinks.textContent()).toEqual(expectedLinks[3]);
+        expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+        //expect(await navLinks.allTextContents()).toEqual(expectedLinks[3]);
     })
 })
