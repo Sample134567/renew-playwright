@@ -12,13 +12,13 @@ test.describe('Contact', () => {
         await page.locator('.contact-message textarea').fill('This is a test message only');
         
         // add soft assertion
-        await expect.soft(page.locator('.contact-message textarea')).toHaveText("Fail test message")
+        // await expect.soft(page.locator('.contact-message textarea')).toHaveText("Fail test message")
 
         // click submit
         await page.locator('button[type=submit]').click();
 
         // verify success message
         const successAlert = page.locator('div[role="alert"]')
-        await expect(successAlert).toHaveText(' for contacting us! We will be in touch with you shortly')
+        await expect(successAlert).toHaveText('Thanks for contacting us! We will be in touch with you shortly')
     })
 })

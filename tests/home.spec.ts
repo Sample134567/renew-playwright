@@ -1,9 +1,12 @@
 import { test, expect } from '@playwright/test';
-
+import HomePage from '../pages/home.page';
 test.describe('Home', () => {
-    test('Open Homepage and verify title', async ({ page }) => {
+    let homePage: HomePage;
+
+    test('Open Homepage and verify title', async ({ page }) => { 
+        homePage = new  HomePage(page);
         // open url
-        await page.goto('https://practice.automationbro.com/');
+        await homePage.navigate();
 
         // verify title
         await expect(page).toHaveTitle('Practice E-Commerce Site – Automation Bro')
@@ -11,18 +14,21 @@ test.describe('Home', () => {
 
     test('Open about page and verify title', async ({ page }) => {
         // open url
-        await page.goto('https://practice.automationbro.com/about/');
+        await homePage.navigate();
 
         // verify title
         await expect(page).toHaveTitle('About – Practice E-Commerce Site')
     })
 
     test('Click get started button using CSS Selector', async ({ page }) => {
+        homePage = new  HomePage(page);
+
         // open url
-        await page.goto('https://practice.automationbro.com');
+        await homePage.navigate();
 
         // Type and click on the button
-        await page.locator('#get-started').click();
+        //await page.locator('#get-started').click();
+        await homePage.getStartedBtn.click(); 
 
         // Verify url has #get-started
         await expect(page).toHaveURL(/.*#get-started/);
@@ -30,42 +36,43 @@ test.describe('Home', () => {
 
 
     test('Verify heading text is visible using text selector', async ({ page }) => {
+        homePage = new  HomePage(page);
         // open url
-        await page.goto('https://practice.automationbro.com');
+        await homePage.navigate();
 
         // find the text locator
-        const headingText = page.locator('text=Think different. Make different.');
+        const headingText = await homePage.headingText
 
         // Verify heading text is visible
         await expect(headingText).toBeVisible();
     })
 
     test('Verify my home link is enabled using text and css selector', async ({ page }) => {
+        homePage = new  HomePage(page);
         // open url
-        await page.goto('https://practice.automationbro.com');
+        await homePage.navigate();
 
         // find the home text 
-        // const homeText = await page.locator('#primary-menu >> text=Home');
-        const homeText = page.locator('#primary-menu:has-text("Home")');
-
-
+        const homeText = homePage.homeLink 
+        
         // verify home text is visible
         await expect(homeText).toBeEnabled();
     })
 
     test('Verify search icon is visible using xpath selector', async ({ page }) => {
+        homePage = new  HomePage(page);
         // open url
-        await page.goto('https://practice.automationbro.com');
+        await homePage.navigate();
 
         // find search icon
-        const searchIcon = page.locator('//*[@id="header-action"]//*[@class="tg-icon tg-icon-search"]');
-
+        const searchIcon = homePage.searchIcon;
 
         // search icon is visible
         await expect(searchIcon).toBeVisible();
     })
 
     test('Verify the text for all nav links', async ({ page }) => {
+        homePage = new  HomePage(page);
         const expectedLinks = [
             "Home",
             "About",
@@ -74,20 +81,11 @@ test.describe('Home', () => {
             "Contact",
             "My account"
         ];
-        
+
         // open url
-        await page.goto('https://practice.automationbro.com');
-
-        // find the nav links
-        const navLinks = page.locator('#primary-menu li[id*=menu]')
-
-        // print out all the links
-        for (const element of await navLinks.elementHandles()) {
-            console.log(await element.textContent())
-        }
+        await homePage.navigate();
 
         // Verify nav links text
-        expect(await navLinks.allTextContents()).toEqual(expectedLinks);
-        //expect(await navLinks.allTextContents()).toEqual(expectedLinks[3]);
+        expect(await homePage.getNavLinksText()).toEqual(expectedLinks);
     })
 })

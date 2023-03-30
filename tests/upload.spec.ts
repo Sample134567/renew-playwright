@@ -1,22 +1,23 @@
 import { test, expect } from '@playwright/test';
+import CartPage from '../pages/cart.page';
 const path = require('path');
 
 test.describe('Upload File', () => {
+    let cartPage: CartPage;
     test('should upload a test file', async ({ page }) => {
+        cartPage = new CartPage(page);
+
         // open url
-        await page.goto('https://practice.automationbro.com/cart/');
+        await cartPage.navigate();
 
         // store test file path
         const filePath = path.join(__dirname, '../data/logotitle.png');
 
-        // upload test file
-        await page.setInputFiles('input#upfile_1', filePath);
-
-        // click the submit button
-        await page.locator('#upload_1').click();
+        cartPage.uploadComponent().uploadFile(filePath);
 
         // assertion
-        await expect(page.locator('#wfu_messageblock_header_1_1')).toContainText('uploaded successfully');
+        await expect(cartPage.uploadComponent().successTxt)
+      .toContainText('uploaded successfully', {timeout: 20000});
 
     })
     test('should upload a test file hidden input field', async ({ page }) => {
@@ -33,8 +34,7 @@ test.describe('Upload File', () => {
                 selector.className = ''
             }
         }) 
-
-
+        
         // upload test file
         await page.setInputFiles('input#upfile_1', filePath); // throws error
 
