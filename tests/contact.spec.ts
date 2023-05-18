@@ -1,24 +1,19 @@
 import { test, expect, type Page } from '@playwright/test';
+import ContactPage from '../pages/contact.page';
 
 test.describe('Contact', () => {
+    let contactPage: ContactPage
+
     test('Fill contact form and verify success message', async ({page}) => {
+        contactPage = new ContactPage(page)
+
         // open contact page
-        await page.goto('https://practice.automationbro.com/contact/');
+        await contactPage.navigate()
 
         // fill out input fields
-        await page.locator('.contact-name input').fill('This is test name');
-        await page.locator('.contact-email input').fill('test@yahoo.com');
-        await page.locator('.contact-phone input').fill('0212345678');
-        await page.locator('.contact-message textarea').fill('This is a test message only');
-        
-        // add soft assertion
-        // await expect.soft(page.locator('.contact-message textarea')).toHaveText("Fail test message")
-
-        // click submit
-        await page.locator('button[type=submit]').click();
+       contactPage.submitForm('testName', 'test@yahoo.com', '12345678','This is just sample messsage')
 
         // verify success message
-        const successAlert = page.locator('div[role="alert"]')
-        await expect(successAlert).toHaveText('Thanks for contacting us! We will be in touch with you shortly')
+        await expect(contactPage.success).toHaveText('Thanks for contacting us! We will be in touch with you shortly')
     })
 })
