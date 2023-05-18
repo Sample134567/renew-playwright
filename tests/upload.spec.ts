@@ -22,7 +22,7 @@ test.describe('Upload File', () => {
     })
     test('should upload a test file hidden input field', async ({ page }) => {
         // open url
-        await page.goto('https://practice.automationbro.com/cart/');
+        await page.goto('/cart/');
 
         // store test file path
         const filePath = path.join(__dirname, '../data/logotitle.png');

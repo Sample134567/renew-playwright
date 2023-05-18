@@ -13,7 +13,7 @@ class CartPage {
     }
 
     async navigate() {
-        await this.page.goto('https://practice.automationbro.com/cart');
+        await this.page.goto('/cart');
     }
 }
 

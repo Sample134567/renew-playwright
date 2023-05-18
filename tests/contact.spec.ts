@@ -6,7 +6,7 @@ test.describe('Contact', () => {
 
     test('Fill contact form and verify success message', async ({page}) => {
         contactPage = new ContactPage(page)
-
+        
         // open contact page
         await contactPage.navigate()
 

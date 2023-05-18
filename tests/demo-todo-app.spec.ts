@@ -190,8 +190,8 @@ test.describe('Editing', () => {
   test('should hide other controls when editing', async ({ page }) => {
     const todoItem = page.locator('.todo-list li').nth(1);
     await todoItem.dblclick();
-    await expect(todoItem.locator('.toggle')).not.toBeVisible();
-    await expect(todoItem.locator('label')).not.toBeVisible();
+    await expect(todoItem.locator('.toggle')).toBeHidden()
+    await expect(todoItem.locator('label')).toBeHidden()
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
