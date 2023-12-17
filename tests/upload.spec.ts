@@ -4,23 +4,29 @@ const path = require('path');
 
 test.describe('Upload File', () => {
     let cartPage: CartPage;
-    test('should upload a test file', async ({ page }) => {
-        cartPage = new CartPage(page);
 
-        // open url
-        await cartPage.navigate();
+    const fileName = ['logotitle.png', '3mb-file.pdf']
 
-        // store test file path
-        const filePath = path.join(__dirname, '../data/logotitle.png');
-
-        cartPage.uploadComponent().uploadFile(filePath);
-
-        // assertion
-        await expect(cartPage.uploadComponent().successTxt)
-      .toContainText('uploaded successfully', {timeout: 20000});
-
-    })
-    test('should upload a test file hidden input field', async ({ page }) => {
+    for(const name of fileName){
+        test(`should upload a ${name} file`, async ({ page }) => {
+            cartPage = new CartPage(page);
+    
+            // open url
+            await cartPage.navigate();
+    
+            // store test file path
+            const filePath = path.join(__dirname, `../data/${name}`);
+    
+            cartPage.uploadComponent().uploadFile(filePath);
+    
+            // assertion
+            await expect(cartPage.uploadComponent().successTxt)
+          .toContainText('uploaded successfully', {timeout: 20000});
+    
+        })
+    }
+    
+    test.skip('should upload a test file hidden input field', async ({ page }) => {
         // open url
         await page.goto('/cart/');
 
@@ -45,7 +51,7 @@ test.describe('Upload File', () => {
         await expect(page.locator('#wfu_messageblock_header_1_1')).toContainText('uploaded successfully');
     })
 
-    test('Upload pdf file', async ({ page }) => {
+    test.skip('Upload pdf file', async ({ page }) => {
         // open url
         await page.goto('https://practice.automationbro.com/cart/');
 

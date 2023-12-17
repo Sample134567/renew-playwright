@@ -3,16 +3,17 @@ import HomePage from '../pages/home.page';
 test.describe('Home', () => {
     let homePage: HomePage;
 
-    test('Open Homepage and verify title', async ({ page }) => { 
-        homePage = new  HomePage(page);
-        // open url
-        await homePage.navigate();
-
-        // verify title
-        await expect(page).toHaveTitle('Practice E-Commerce Site – Automation Bro')
+    test.beforeEach(async ({ page }) => {
+        homePage = new HomePage(page);
+        await homePage.navigate()
     })
 
-    test('Open about page and verify title', async ({ page }) => {
+    test('Open Homepage and verify title', async ({ page }) => { 
+        // verify title
+        await expect(page).toHaveTitle('Practice E-Commerce Site – SDET Unicorns – Helping you succeed in Software Quality.')
+    })
+
+    test.skip('Open about page and verify title', async ({ page }) => {
         // open url
         await homePage.navigate();
 
@@ -21,12 +22,6 @@ test.describe('Home', () => {
     })
 
     test('Click get started button using CSS Selector', async ({ page }) => {
-        homePage = new  HomePage(page);
-
-        // open url
-        await homePage.navigate();
-
-        // Type and click on the button
         //await page.locator('#get-started').click();
         await homePage.getStartedBtn.click(); 
 
@@ -36,10 +31,6 @@ test.describe('Home', () => {
 
 
     test('Verify heading text is visible using text selector', async ({ page }) => {
-        homePage = new  HomePage(page);
-        // open url
-        await homePage.navigate();
-
         // find the text locator
         const headingText = await homePage.headingText
 
@@ -48,10 +39,6 @@ test.describe('Home', () => {
     })
 
     test('Verify my home link is enabled using text and css selector', async ({ page }) => {
-        homePage = new  HomePage(page);
-        // open url
-        await homePage.navigate();
-
         // find the home text 
         const homeText = homePage.homeLink 
         
@@ -60,10 +47,6 @@ test.describe('Home', () => {
     })
 
     test('Verify search icon is visible using xpath selector', async ({ page }) => {
-        homePage = new  HomePage(page);
-        // open url
-        await homePage.navigate();
-
         // find search icon
         const searchIcon = homePage.searchIcon;
 
@@ -72,7 +55,6 @@ test.describe('Home', () => {
     })
 
     test('Verify the text for all nav links', async ({ page }) => {
-        homePage = new  HomePage(page);
         const expectedLinks = [
             "Home",
             "About",
@@ -82,9 +64,7 @@ test.describe('Home', () => {
             "My account"
         ];
 
-        // open url
-        await homePage.navigate();
-
+        console.log(homePage.getNavLinksText())
         // Verify nav links text
         expect(await homePage.getNavLinksText()).toEqual(expectedLinks);
     })

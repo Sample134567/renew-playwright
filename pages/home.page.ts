@@ -13,8 +13,8 @@ class HomePage {
         this.getStartedBtn = page.locator('#get-started');
         this.headingText = page.locator('text=Think different. Make different.');
         this.homeLink = page.locator('#primary-menu:has-text("Home")');
-        this.searchIcon = page.locator('//*[@id="header-action"]//*[@class="tg-icon tg-icon-search"]');
-        this.navLinks = page.locator('#primary-menu li[id*=menu]');
+        this.searchIcon = page.locator('#zak-masthead div.zak-header-col.zak-header-col--2 > div.zak-header-actions.zak-header-actions--desktop ');
+        this.navLinks = page.locator('#zak-primary-nav li[id*=menu]');
     }
 
     async navigate() {
