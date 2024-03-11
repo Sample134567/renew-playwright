@@ -54,12 +54,13 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Chrome'],
         headless: false
       },
-    }
+    },
 
     // {
     //   name: 'firefox',
     //   use: {
     //     ...devices['Desktop Firefox'],
+    //     headless: false
     //   },
     // },
 
@@ -71,12 +72,13 @@ const config: PlaywrightTestConfig = {
     // },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['Pixel 5'],
+        headless: false
+      },
+    },
     // {
     //   name: 'Mobile Safari',
     //   use: {
