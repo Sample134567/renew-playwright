@@ -52,7 +52,7 @@ const config: PlaywrightTestConfig = {
       name: 'chrome',
       use: {
         ...devices['Desktop Chrome'],
-        headless: true
+        headless: false
       },
     },
 
